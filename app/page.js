@@ -1,9 +1,18 @@
-import Image from 'next/image'
+import Navbar from "./navbar.js"
+import IterSelect from "./iterSelect.js"
+import IterTable from "./iterTable.js"
+import IterImg from "./iterImg.js"
+import PathSelect from "./pathSelect.js"
+
 
 export default function Home() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1 className='text-lg'>Aero404</h1>
+		<main className="">
+			<Navbar/>
+			<PathSelect/>
+			<IterSelect/>
+			<IterImg/>
+			<IterTable/>
 		</main>
 	)
 }
