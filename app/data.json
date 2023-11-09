@@ -1,0 +1,6 @@
+{
+    "name": "post process",
+    "structure":{
+        "001":["a","b","c","d"]
+    }
+}
