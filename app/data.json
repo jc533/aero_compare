@@ -1,7 +1,7 @@
 {
     "name": "post process",
     "dim":[
-        "x","y","z","x200"
+        "KA1","KA2","KA3","KA4"
     ], 
     "simu":[
         "test 01",
