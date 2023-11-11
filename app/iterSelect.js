@@ -10,9 +10,6 @@ import data from "./data.json"
 
 
 export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim}) {
-    // const [simuA, setSimuA] = useState('')
-    // const [simuB, setSimuB] = useState('')
-    // const [dim, setDim] = useState('')
     useEffect(()=>{
         if (simuA == simuB && (simuA||simuB)){
             alert("are u sure u want to compare the same simu?")

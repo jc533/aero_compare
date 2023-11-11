@@ -1,10 +1,10 @@
 {
     "name": "post process",
     "dim":[
-        "KA1","KA2","KA3","KA4"
+        "1","2","3","4"
     ], 
     "simu":[
-        "test 01",
+        "test",
         "test2"
     ]
 }
