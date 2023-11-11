@@ -1,6 +1,6 @@
 {
     "name": "post process",
-    "structure":{
+    "simu":{
         "001":["a","b","c","d"]
     }
 }

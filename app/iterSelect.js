@@ -1,43 +1,66 @@
 "use client"
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import data from "./data.json"
+// import { promises as fs } from 'fs'
 
-export default function BasicMenu() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
-  return (
-    <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        Dashboard
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
-    </div>
-  );
+export default async function Iterselect() {
+	const [simu, setSimu] = useState('')
+	const [dim, setDim] = useState('')
+	// const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8');
+    // const data = JSON.parse(file);
+	return (
+		<Box>
+			<SimuSelect val={simu} setVal={setSimu}/>
+			<DimSelect val={dim} setVal={setDim}/>
+		</Box>
+	)
+}
+const SimuSelect = ({val,setVal}) => {
+	return (
+		<BasicSelect 
+			val={val} setVal={setVal} 
+			name="simulation" labelId="simuSelect">
+			<MenuItem value={1}>0</MenuItem>
+			<MenuItem value={2}>1</MenuItem>
+			<MenuItem value={3}>2</MenuItem>
+		</BasicSelect>
+	)
+}
+const DimSelect = ({val,setVal}) => {
+	return (
+		<BasicSelect 
+			val={val} setVal={setVal}
+			name="dimension" labelId="dimSelect">
+			<MenuItem value={"x"}>x</MenuItem>
+			<MenuItem value={"y"}>y</MenuItem>
+			<MenuItem value={"z"}>z</MenuItem>
+		</BasicSelect>
+	)
+}
+
+const BasicSelect = ({children,labelId,name,val,setVal}) => {
+
+	const handleChange = (event) => {
+		setVal(event.target.value);
+	}
+
+	return (
+		<FormControl sx={{ m: 1, minWidth: 150 }}>
+		<InputLabel>{name}</InputLabel>
+			<Select
+				labelId={labelId}
+				value={val}
+				label={name}
+				onChange={handleChange}
+			>
+				{children}
+			</Select>
+		</FormControl>
+	)
 }

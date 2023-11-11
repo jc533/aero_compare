@@ -9,9 +9,11 @@ export default function Home() {
 	return (
 		<main className="">
 			<Navbar/>
+			<div className="m-2">
 			<IterSelect/>
 			<IterImg/>
 			<IterTable/>
+			</div>
 		</main>
 	)
 }
