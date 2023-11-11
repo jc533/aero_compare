@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-const directoryPath = path.join(__dirname,'/public/KA\ racing');
+const directoryPath = path.join(__dirname,'/test');
 //passsing directoryPath and callback function
 fs.readdir(directoryPath, function (err, files) {
     //handling error

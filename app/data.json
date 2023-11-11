@@ -1,6 +1,10 @@
 {
     "name": "post process",
-    "simu":{
-        "001":["a","b","c","d"]
-    }
+    "dim":[
+        "x","y","z","x200"
+    ], 
+    "simu":[
+        "test 01",
+        "test2"
+    ]
 }
