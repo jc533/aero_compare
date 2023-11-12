@@ -9,12 +9,14 @@ export default function IterBox(){
     const [simuA, setSimuA] = useState('')
     const [simuB, setSimuB] = useState('')
     const [dim, setDim] = useState('')
+    const [isZoom, setZoom] = useState(false)
+    const toggleZoom = ()=>setZoom(!isZoom)
     return (
         <div className="m-2">
             <IterSelect simuA={simuA} setSimuA={setSimuA} 
             simuB={simuB} setSimuB={setSimuB}
-            dim={dim} setDim={setDim}/>
-			<IterImg simuA={simuA} simuB={simuB} dim={dim}/>
+            dim={dim} setDim={setDim} toggleZoom={toggleZoom}/>
+			<IterImg simuA={simuA} simuB={simuB} dim={dim} isZoom={isZoom}/>
 			<IterTable simuA={simuA} simuB={simuB}/>
         </div>
     )
