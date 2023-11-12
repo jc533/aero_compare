@@ -8,34 +8,37 @@ import Inline from "yet-another-react-lightbox/plugins/inline"
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 // import { promises as fs } from 'fs'
 
-const Img = ({src,toggle,update,isZoom,id,pos}) => {
+const Img = ({src,toggle,update,isZoom,id}) => {
+    console.log(src.src)
     return (
+        <div className={src.src?' ':"hidden"}>
         <Lightbox
-          slides={[src]}
-          plugins={[Inline,Zoom]}
-          render={{
-            buttonPrev:()=>null,
-            buttonNext:()=>null,
-            buttonZoom:isZoom?undefined:()=>null
+            slides={[src]}
+            plugins={[Inline,Zoom]}
+            render={{
+                buttonPrev:()=>null,
+                buttonNext:()=>null,
+                buttonZoom:isZoom?undefined:()=>null
             }}
-          on={{
-            view:update(id),
-            click:toggle(true)}}
-          carousel={{
-            finite:true,
-            padding: 0,
-            spacing: 0,
-            imageFit: "cover",
-          }}
-          inline={{
-            style: {
-              width: "100%",
-              maxWidth: "600px",
-              aspectRatio: "3 / 2",
-              margin: "1 auto",
-            },
-          }}
+            on={{
+                view:update(id),
+                click:toggle(true)}}
+            carousel={{
+                finite:true,
+                padding: 0,
+                spacing: 0,
+                imageFit: "cover",
+            }}
+            inline={{
+                style: {
+                    width: "100%",
+                    maxWidth: "600px",
+                    aspectRatio: "3 / 2",
+                //   margin: "1 auto",
+                },
+            }}
         />
+        </div>
     )
 }
 const Imglist = ({imglist,isZoom}) => {
@@ -75,12 +78,12 @@ const Imglist = ({imglist,isZoom}) => {
 
 export default function IterImg({simuA,simuB,dim,isZoom,pos}){
     const imglist = {
-        "A":{src:simuA?`/${simuA}/${pos}/${dim}.jpg`:null},
-        "B":{src:simuB?`/${simuB}/${pos}/${dim}.jpg`:null}
+        "A":{src:simuA&&pos&&dim?`/${simuA}/${pos}/${dim}.jpg`:null},
+        "B":{src:simuB&&pos&&dim?`/${simuB}/${pos}/${dim}.jpg`:null}
     }
     return (
-        <Box sx={{maxWidth:700}}>
+        <div className='w-full grid lg:grid-cols-2'>
             <Imglist imglist={imglist} isZoom={isZoom}/>
-        </Box>
+        </div>
     )
 }
