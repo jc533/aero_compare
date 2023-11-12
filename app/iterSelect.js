@@ -12,7 +12,7 @@ import data from "./data.json"
 export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim,toggleZoom,pos,setPos}) {
     useEffect(()=>{
         if (simuA == simuB && (simuA||simuB)){
-            alert("are u sure u want to compare the same simu?")
+            // alert("are u sure u want to compare the same simu?")
         }
     })
     return (

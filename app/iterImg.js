@@ -11,7 +11,7 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 const Img = ({src,toggle,update,isZoom,id,pos}) => {
     return (
         <Lightbox
-          slides={[{src}]}
+          slides={[src]}
           plugins={[Inline,Zoom]}
           render={{
             buttonPrev:()=>null,
@@ -38,18 +38,13 @@ const Img = ({src,toggle,update,isZoom,id,pos}) => {
         />
     )
 }
-const Imglist = ({sildes,isZoom}) => {
+const Imglist = ({imglist,isZoom}) => {
     const [open, setOpen] = useState(false)
     const [index, setIndex] = useState(0)
   
     const toggleOpen = state => () => {setOpen(state)}
-  
-    const handleClick = (current) =>()=> {
-        console.log("jizz")
-        setIndex(current)
-    }
+    const handleClick = (current) =>()=> setIndex(current)
     const updateIndex = ({index:current})=>setIndex(current)
-    const slides = [{src:"/test/x/1.jpg"},{src:"/test/x/2.jpg"}]
     return (
       <>
         <Img
@@ -57,19 +52,19 @@ const Imglist = ({sildes,isZoom}) => {
             isZoom={isZoom}
             toggle={toggleOpen}
             id={0}
-            src="/test/x/1.jpg"/>
+            src={imglist.A}/>
         <Img
             update={handleClick}
             isZoom={isZoom}
             toggle={toggleOpen}
             id={1}
-            src="/test/x/2.jpg"/>
+            src={imglist.B}/>
         <Lightbox
           plugins={[Zoom]}
           open={open}
           close={toggleOpen(false)}
           index={index}
-          slides={slides}
+          slides={[imglist.A,imglist.B]}
           on={{ view: updateIndex }}
           animation={{ fade: 0 }}
           controller={{ closeOnPullDown: true, closeOnBackdropClick: true }}
@@ -78,23 +73,14 @@ const Imglist = ({sildes,isZoom}) => {
     );
   }
 
-export default function IterImg({simuA,simuB,dim,isZoom}){
+export default function IterImg({simuA,simuB,dim,isZoom,pos}){
+    const imglist = {
+        "A":{src:simuA?`/${simuA}/${pos}/${dim}.jpg`:null},
+        "B":{src:simuB?`/${simuB}/${pos}/${dim}.jpg`:null}
+    }
     return (
         <Box sx={{maxWidth:700}}>
-            <Imglist isZoom={isZoom}/>
-        {/* <Image
-            width={400}
-            height={400}
-            src={simuA?`/${simuA}/${pos}/${dim}.jpg`:''}
-            alt="lalalala"
-            layout='responsive'
-        />
-        <Image
-            width={400}
-            height={400}
-            src={simuB?`/${simuB}/${pos}/${dim}.jpg`:""}
-            alt="lalalala"
-        /> */}
+            <Imglist imglist={imglist} isZoom={isZoom}/>
         </Box>
     )
 }

@@ -14,9 +14,13 @@ export default function IterBox(){
     const toggleZoom = ()=>setZoom(!isZoom)
     return (
         <div className="m-2">
-            <IterSelect simuA={simuA} setSimuA={setSimuA} 
-            simuB={simuB} setSimuB={setSimuB}
-            dim={dim} setDim={setDim} toggleZoom={toggleZoom}/>
+            <IterSelect 
+                simuA={simuA} setSimuA={setSimuA} 
+                simuB={simuB} setSimuB={setSimuB}
+                dim={dim} setDim={setDim} 
+                pos={pos} setPos={setPos}
+                toggleZoom={toggleZoom}
+            />
 			<IterImg simuA={simuA} simuB={simuB} dim={dim} isZoom={isZoom} pos={pos}/>
 			<IterTable simuA={simuA} simuB={simuB}/>
         </div>
