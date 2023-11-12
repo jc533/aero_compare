@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Box } from '@mui/system'
+import { ImgComparisonSlider } from '@img-comparison-slider/react';
 import "yet-another-react-lightbox/styles.css"
 import Lightbox from "yet-another-react-lightbox"
 import Inline from "yet-another-react-lightbox/plugins/inline"
@@ -76,15 +77,39 @@ const Imglist = ({imglist,isZoom}) => {
       </>
     );
   }
+const CompareImg = ({imglist}) => {
+    const style = {
+        "--divider-width": "1px",
+        "--divider-color": "#000000",
+        "--default-handle-opacity": 0,
+        maxWidth:"600px", margin:'0 auto'
+      }
+    return (
+        <div>
+            <Typography className='text-center' variant='h5'>{imglist.A.src}</Typography>
+            <ImgComparisonSlider
+             className='flex items-center justify-center'
+             direction="vertical" style={style}>
+                <img slot="first" src={imglist.A.src} />
+                <img slot="second"  src={imglist.B.src} />
+            </ImgComparisonSlider>
+            <Typography className='text-center' variant='h5'>{imglist.B.src}</Typography>
+        </div>
+    )
+}
 
-export default function IterImg({simuA,simuB,dim,isZoom,pos}){
+
+export default function IterImg({simuA,simuB,dim,isZoom,pos,isCom}){
     const imglist = {
         "A":{src:simuA&&pos&&dim?`/${simuA}/${pos}/${dim}.jpg`:null},
         "B":{src:simuB&&pos&&dim?`/${simuB}/${pos}/${dim}.jpg`:null}
     }
     return (
+        <>
         <div className='w-full grid lg:grid-cols-2'>
             <Imglist imglist={imglist} isZoom={isZoom}/>
         </div>
+        {isCom ? <CompareImg imglist={imglist}/> : null}
+        </>
     )
 }
