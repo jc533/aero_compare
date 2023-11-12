@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import data from "./data.json"
 
 
-export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim}) {
+export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim,pos,setPos}) {
     useEffect(()=>{
         if (simuA == simuB && (simuA||simuB)){
             alert("are u sure u want to compare the same simu?")
@@ -27,7 +27,20 @@ export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim}) {
                     open
             </Button> */}
             <DimSelect val={dim} setVal={setDim}/>
+            <PlaneSelect pos={pos} setPos={setPos}/>
         </Box>
+    )
+}
+const PlaneSelect = ({val,setVal}) => {
+    const options = data.plane.map(obj=>{
+        return <MenuItem key={obj} value={obj}>{obj}</MenuItem>
+    })
+    return (
+        <BasicSelect 
+            val={val} setVal={setVal} 
+            name="plane" labelId="planeSelect">
+            {options}
+        </BasicSelect>
     )
 }
 const SimuSelect = ({val,setVal,num}) => {

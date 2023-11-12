@@ -2,7 +2,10 @@
     "name": "post process",
     "dim":[
         "1","2","3","4"
-    ], 
+    ],
+    "plane":[
+        "x","y","z"
+    ],
     "simu":[
         "test",
         "test2"
