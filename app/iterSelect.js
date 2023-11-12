@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import data from "./data.json"
 
 
-export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim,pos,setPos}) {
+export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim,toggleZoom,pos,setPos}) {
     useEffect(()=>{
         if (simuA == simuB && (simuA||simuB)){
             alert("are u sure u want to compare the same simu?")
@@ -19,15 +19,16 @@ export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim,pos
         <Box>
             <SimuSelect num="1" val={simuA} setVal={setSimuA}/>
             <SimuSelect num="2" val={simuB} setVal={setSimuB}/>
-            {/* <Button
+            <DimSelect val={dim} setVal={setDim}/>
+            <PlaneSelect val={pos} setVal={setPos}/>
+            <Button
                 sx={{m:1}}
                 variant="contained"
                 className="bg-indigo-600"
-                size="large">
-                    open
-            </Button> */}
-            <DimSelect val={dim} setVal={setDim}/>
-            <PlaneSelect val={pos} setVal={setPos}/>
+                size="large"
+                onClick={toggleZoom}>
+                    toggle zoom
+            </Button>
         </Box>
     )
 }
