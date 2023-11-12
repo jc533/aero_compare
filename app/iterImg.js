@@ -8,10 +8,9 @@ import Inline from "yet-another-react-lightbox/plugins/inline"
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 // import { promises as fs } from 'fs'
 
-const Img = ({src,toggle,update,index,isZoom}) => {
+const Img = ({src,toggle,update,isZoom,id}) => {
     return (
         <Lightbox
-          index={index}
           slides={[{src}]}
           plugins={[Inline,Zoom]}
           render={{
@@ -20,8 +19,8 @@ const Img = ({src,toggle,update,index,isZoom}) => {
             buttonZoom:isZoom?undefined:()=>null
             }}
           on={{
-            click: update,
-          }}
+            view:update(id),
+            click:toggle(true)}}
           carousel={{
             finite:true,
             padding: 0,
@@ -43,24 +42,27 @@ const Imglist = ({sildes,isZoom}) => {
     const [open, setOpen] = useState(false)
     const [index, setIndex] = useState(0)
   
-    const toggleOpen = (state,idx) => () => {
-        setOpen(state)
-        setIndex(idx)
-    }
+    const toggleOpen = state => () => {setOpen(state)}
   
-    const updateIndex = ({ index:current }) =>setIndex(current);
+    const handleClick = (current) =>()=> {
+        console.log("jizz")
+        setIndex(current)
+    }
+    const updateIndex = ({index:current})=>setIndex(current)
     const slides = [{src:"/test/x/1.jpg"},{src:"/test/x/2.jpg"}]
     return (
       <>
         <Img
-            update={updateIndex}
-            index={index}
+            update={handleClick}
             isZoom={isZoom}
+            toggle={toggleOpen}
+            id={0}
             src="/test/x/1.jpg"/>
         <Img
-            update={updateIndex}
-            index={index}
-            isZoom={isZoom} 
+            update={handleClick}
+            isZoom={isZoom}
+            toggle={toggleOpen}
+            id={1}
             src="/test/x/2.jpg"/>
         <Lightbox
           plugins={[Zoom]}
@@ -77,8 +79,6 @@ const Imglist = ({sildes,isZoom}) => {
   }
 
 export default function IterImg({simuA,simuB,dim,isZoom}){
-    // const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8');
-    // const data = JSON.parse(file);
     return (
         <Box sx={{maxWidth:700}}>
             <Imglist isZoom={isZoom}/>
