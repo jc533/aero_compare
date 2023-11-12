@@ -27,7 +27,7 @@ export default function Iterselect({simuA,setSimuA,simuB,setSimuB,dim,setDim,pos
                     open
             </Button> */}
             <DimSelect val={dim} setVal={setDim}/>
-            <PlaneSelect pos={pos} setPos={setPos}/>
+            <PlaneSelect val={pos} setVal={setPos}/>
         </Box>
     )
 }

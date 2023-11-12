@@ -15,7 +15,7 @@ export default function IterBox(){
             <IterSelect simuA={simuA} setSimuA={setSimuA} 
             simuB={simuB} setSimuB={setSimuB}
             dim={dim} setDim={setDim} pos={pos} setPos={setPos}/>
-			<IterImg simuA={simuA} simuB={simuB} dim={dim}/>
+			<IterImg simuA={simuA} simuB={simuB} dim={dim} pos={pos}/>
 			<IterTable simuA={simuA} simuB={simuB}/>
         </div>
     )
