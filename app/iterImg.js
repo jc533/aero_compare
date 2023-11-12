@@ -6,12 +6,13 @@ import "yet-another-react-lightbox/styles.css"
 import Lightbox from "yet-another-react-lightbox"
 import Inline from "yet-another-react-lightbox/plugins/inline"
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
-// import { promises as fs } from 'fs'
+import Typography from '@mui/material/Typography';
 
 const Img = ({src,toggle,update,isZoom,id}) => {
     console.log(src.src)
     return (
         <div className={src.src?' ':"hidden"}>
+        <Typography variant='h5'>{src.src}</Typography>
         <Lightbox
             slides={[src]}
             plugins={[Inline,Zoom]}
@@ -22,7 +23,7 @@ const Img = ({src,toggle,update,isZoom,id}) => {
             }}
             on={{
                 view:update(id),
-                click:toggle(true)}}
+                click:!isZoom?toggle(true):()=>{}}}
             carousel={{
                 finite:true,
                 padding: 0,
