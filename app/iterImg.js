@@ -8,30 +8,22 @@ import Inline from "yet-another-react-lightbox/plugins/inline"
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 // import { promises as fs } from 'fs'
 
-const Img = ({sildes,isZoom}) => {
-    const [open, setOpen] = useState(false)
-    const [index, setIndex] = useState(0)
-  
-    const toggleOpen = state => () => setOpen(state)
-  
-    const updateIndex = ({ index:current }) =>setIndex(current);
-    const slides = [{src:"/test/x/1.jpg"}]
+const Img = ({src,toggle,update,index,isZoom}) => {
     return (
-      <>
         <Lightbox
           index={index}
-          slides={slides}
+          slides={[{src}]}
           plugins={[Inline,Zoom]}
           render={{
             buttonPrev:()=>null,
             buttonNext:()=>null,
-            buttonZoom:isZoom?()=>null:undefined
+            buttonZoom:isZoom?undefined:()=>null
             }}
           on={{
-            view: updateIndex,
-            click: toggleOpen(true),
+            click: update,
           }}
           carousel={{
+            finite:true,
             padding: 0,
             spacing: 0,
             imageFit: "cover",
@@ -39,13 +31,37 @@ const Img = ({sildes,isZoom}) => {
           inline={{
             style: {
               width: "100%",
-              maxWidth: "900px",
+              maxWidth: "600px",
               aspectRatio: "3 / 2",
-              margin: "0 auto",
+              margin: "1 auto",
             },
           }}
         />
+    )
+}
+const Imglist = ({sildes,isZoom}) => {
+    const [open, setOpen] = useState(false)
+    const [index, setIndex] = useState(0)
   
+    const toggleOpen = (state,idx) => () => {
+        setOpen(state)
+        setIndex(idx)
+    }
+  
+    const updateIndex = ({ index:current }) =>setIndex(current);
+    const slides = [{src:"/test/x/1.jpg"},{src:"/test/x/2.jpg"}]
+    return (
+      <>
+        <Img
+            update={updateIndex}
+            index={index}
+            isZoom={isZoom}
+            src="/test/x/1.jpg"/>
+        <Img
+            update={updateIndex}
+            index={index}
+            isZoom={isZoom} 
+            src="/test/x/2.jpg"/>
         <Lightbox
           plugins={[Zoom]}
           open={open}
@@ -65,7 +81,7 @@ export default function IterImg({simuA,simuB,dim,isZoom}){
     // const data = JSON.parse(file);
     return (
         <Box sx={{maxWidth:700}}>
-            <Img isZoom={isZoom}/>
+            <Imglist isZoom={isZoom}/>
         {/* <Image
             width={400}
             height={400}
